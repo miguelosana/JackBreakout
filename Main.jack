@@ -1,0 +1,39 @@
+class Main{
+
+	function void main(){
+
+	var int score, lives;
+	var boolean isRunning ;
+		var Ball ball ;
+		var Paddle paddle;
+		var Array paddleCoords;
+		var BrickField brickField;
+
+		let score = 0;
+		let lives = 3;
+
+		let ball = Ball.new();
+		let paddle = Paddle.new();
+		let brickField = BrickField.new(10,30);
+
+
+		let isRunning = true;
+		
+		while(isRunning){
+//			do Screen.clearScreen();			
+			do brickField.draw();
+			do paddle.move();
+			let paddleCoords = paddle.draw();
+			let isRunning = ball.draw(paddleCoords);
+			do brickField.hitDetection(ball);
+//			do Sys.wait(10);
+			
+		
+		}
+		do ball.dispose();
+		do paddle.dispose();
+		do brickField.dispose();
+	return;
+	}
+
+}

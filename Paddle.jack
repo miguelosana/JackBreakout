@@ -1,0 +1,53 @@
+class Paddle {
+
+	field Array coord;
+
+	constructor Paddle new(){
+		let coord=Array.new(4);
+		let coord[0]=100;
+		let coord[1]=240;
+		return this;
+	}
+
+	method void dispose() {
+		do coord.dispose();
+		do Memory.deAlloc(this);	
+		return;
+	}
+
+	method Array draw(){
+		let coord[2]= coord[0]+50;
+		let coord[3]= coord[1]+5;
+		do doDraw(true);
+		return coord;
+	}
+
+	method void move(){
+		if(Keyboard.keyPressed() = 0){
+		return;
+		}
+		if(Keyboard.keyPressed() = 130){
+			if((coord[0]- 1) > 0){
+				do doDraw(false);
+				let coord[0] = coord[0] - 5;
+				}
+			return;
+		}
+		if(Keyboard.keyPressed() = 132){
+			if((coord[0]+50 +1) <511){
+				do doDraw(false);
+				let coord[0] = coord[0] + 5;
+			}
+			return;
+		}
+
+		return;
+	}
+
+	method void doDraw(boolean color){
+	
+		do Screen.setColor(color);
+		do Screen.drawRectangle(coord[0],coord[1],coord[2],coord[3]);	
+		return;
+	}
+}

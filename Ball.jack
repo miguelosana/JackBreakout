@@ -1,0 +1,107 @@
+class Ball {
+	field int x,xSpeed;
+	field int y, ySpeed;
+	field int falling,left;
+
+
+
+	constructor Ball new(){
+		let x = 150;
+		let y = 150;
+		let ySpeed = 2;
+		let xSpeed = 2;
+		let falling = 1;
+		let left = 0;
+
+		return this;
+	}
+
+	method int getX(){
+		return x;
+	}
+	method void increaseXSpeed(int v){
+		if((xSpeed +v ) <10){
+			let xSpeed = xSpeed +v;
+			}
+			return;
+	}
+	method void increaseYSpeed(int v){
+		if((ySpeed +v )<10){
+			let ySpeed  = ySpeed +v;
+		}
+		return;
+	}
+	method int getY(){
+		return y;
+	}
+
+	method void toggleFalling(){
+		if(falling=1){
+			let falling = 0;
+		}else{
+			let falling = 1;
+		}
+		return ;
+	}
+
+	method boolean draw(Array paddleCoords){
+		var boolean onScreen;
+		var int nextX,nextY ;
+		do Screen.setColor(false);
+		do Screen.drawCircle(x, y,5);
+		let onScreen = true;
+		if((((y - ySpeed) -5)< 0) & (falling=0)){
+		let	falling=1;
+		}
+
+		/* debug code
+		do Output.moveCursor(1,1);
+		do Output.printInt(paddleCoords[1]);
+		do Output.moveCursor(1,10);
+		do Output.printInt((y+ySpeed)+5);
+		do Output.moveCursor(1,20);
+		do Output.printInt((y-ySpeed)-5);
+		*/
+		//check if paddle hit
+		if((falling =1) & (((y+ySpeed)+5) > paddleCoords[1]) & ((x > paddleCoords[0]) & (x < paddleCoords[2]))){
+			let falling=0;
+			do increaseYSpeed(1);
+		}
+
+		//check if leaving playArea
+		if((((y+ySpeed)+5) > 255 )& falling=1){
+			let onScreen=false;
+			return onScreen;
+		}
+
+		if(((x + xSpeed) +5) > 507){
+			let left = 0;
+		}
+		if(((x - xSpeed) -5) < 0){
+			let left = 1;
+		}
+		if(left =1){
+			let x = x + xSpeed;
+		}else{
+			let x = x - xSpeed;
+		}
+		if(falling=1){
+			let y = y +ySpeed;
+
+		}else{
+			let y = y- ySpeed;
+		}
+
+		do Screen.setColor(true);
+		do Screen.drawCircle(x, y,5);
+		return onScreen;
+	}
+
+	method void dispose(){
+		do Memory.deAlloc(this);
+		return;
+	}
+
+
+
+}

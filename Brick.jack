@@ -1,0 +1,67 @@
+class Brick{
+	field int brickWidth,brickHeight,brickPadding,brickOffsetTop,brickOffsetLeft;
+	field boolean isActive;
+	field int x1,y1,x2,y2;	
+	/* i and j are used to calculate the coords of the brick */
+	// can be optimized by moving the fields starting with brick to the BrickField class
+	constructor Brick new(int i, int j){
+
+		let brickWidth = 10;
+		let brickHeight = 10;
+		let brickPadding = 0;
+		let brickOffsetTop = 10;
+		let brickOffsetLeft = 10;
+
+		let x1 = (((i*brickWidth+brickPadding)) +brickOffsetLeft);
+		let y1 = (((j*brickHeight+brickPadding)) +brickOffsetTop);
+		let x2 = x1 +(brickWidth) ;
+		let y2 = y1 + (brickHeight) ;
+		let isActive = true;
+
+
+		return this;	
+	
+	}
+
+	method int getY(){
+		return y1;
+	}
+	
+
+	method void draw(){
+		if(isActive){
+			do Screen.setColor(true);
+		}else{
+			do Screen.setColor(false);
+		}
+/*		
+		do Output.moveCursor(1,1);
+		do Output.printInt(x1);
+		do Output.moveCursor(1,10);
+		do Output.printInt(y1);
+	
+	*/
+		do Screen.drawRectangle(x1, y1,x2,y2);
+		return;
+	}
+
+	method boolean isHit(){
+	if(~isActive ){
+		return false;
+	}else{
+		let isActive = false;
+		return true;
+		
+	}
+		/*if((((ballX+5) > x1) &( (ballX +5)< x2 )) & (((ballY +5) = y2) | (((ballY+5) =y1) ))){
+			let isActive = false;
+			return true;
+
+		}*/
+	}
+
+	method void dispose(){
+		do Memory.deAlloc(this);
+	return;
+	}
+}

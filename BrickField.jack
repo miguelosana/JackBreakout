@@ -1,0 +1,97 @@
+class BrickField{
+
+	field int rows,columns,totalBricks,maxY,maxX;
+	field Array bricks;
+
+	constructor BrickField new(int _rows, int _columns){
+			var int i,j,c;
+			var Array brickRows;
+			let rows = _rows;
+			let columns = _columns;
+			let totalBricks = (columns * rows);
+			let bricks = Array.new(totalBricks);
+			let i=0;
+				let c =0;
+			while(i < totalBricks){
+				let j=0;
+				while(j < rows){
+					let  bricks[i] = Brick.new(c,j);
+					let j = j +1;
+					let i = i+1;
+				}
+				let c = c +1;
+			}
+
+		return this;
+	}
+
+	method void draw(){
+		var int i,j;
+		var Brick currentBrick;
+		let i=0;
+		while(i < totalBricks){
+			let currentBrick = bricks[i];
+			do currentBrick.draw();
+			let i = i+1;
+		}
+		return;
+	}
+	method void hitDetection(Ball ball){
+	//optimize don't do naive while lloop
+		var int i,maxY;
+		var Brick currentBrick;
+		var boolean isHit;
+	var int xdiv,ydiv;
+		let i =0;
+
+
+//x/10 +y/10 = index
+			let maxY = ((rows * 10 ) +10);
+			let maxX = ((columns * 10) + 10);
+do Output.moveCursor(1, 50);
+do Output.printInt(ball.getX());
+do Output.moveCursor(1,55);
+do Output.printInt(maxX);
+if((ball.getY() < maxY)  & (ball.getX() < maxX)  ){
+	let xdiv = Math.divide(ball.getX(),10);
+	let ydiv = Math.divide(ball.getY(), 10);
+	let i = (((xdiv*rows) + ydiv)-1) ;	
+	do Output.moveCursor(1,60);
+	do Output.printInt(i);
+
+let 	currentBrick = bricks[i];
+		let isHit = currentBrick.isHit();
+		/*
+		while(((i < totalBricks) & ~isHit)){
+			let currentBrick = bricks[i];
+			let isHit = currentBrick.isHit(ball.getX(), ball.getY());
+			let i = i +1;
+			
+		}*/
+		
+		if(isHit){ //bounce the ball back
+			//do Sys.wait(1000);
+			do ball.toggleFalling();
+		}
+		}
+		return ;
+	}
+
+
+	method void dispose(){
+		var int i,j;
+		var Brick currentBrick;
+		
+		let i =0;
+		while(i < totalBricks){
+		let currentBrick = bricks[i];
+			do currentBrick.dispose();
+			let i = i +1;
+
+		
+		}
+		do Memory.deAlloc(this);
+		return;
+	}
+}
+
