@@ -65,7 +65,7 @@ class Ball {
 		//check if paddle hit
 		if((falling =1) & (((y+ySpeed)+5) > paddleCoords[1]) & ((x > paddleCoords[0]) & (x < paddleCoords[2]))){
 			let falling=0;
-			do increaseYSpeed(1);
+			do increaseYSpeed(0);
 		}
 
 		//check if leaving playArea
