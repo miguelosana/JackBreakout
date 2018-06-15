@@ -42,11 +42,11 @@ class BrickField{
 			let i = i+1;
 		}
 
-/*		do Output.moveCursor(1,50);
+		do Output.moveCursor(1,50);
 		do Output.printString("Score:");
 		do Output.moveCursor(1,57);
 		do Output.printInt(score);
-		*/
+		
 		return;
 	}
 	method void hitDetection(Ball ball){
@@ -69,11 +69,11 @@ if((ballY < maxY)  & ( ballX < maxX)  ){
 	let xdiv = Math.divide(ballX,10);
 	let ydiv = Math.divide(ballY, 10);
 	let i = (((xdiv*rows) + ydiv)-1) ;	
-	do Output.moveCursor(1,60);
-	do Output.printInt(i);
+//	do Output.moveCursor(1,60);
+//	do Output.printInt(i);
 
 let 	currentBrick = bricks[i];
-if(currentBrick = null){}
+if((currentBrick = null) | (i > totalBricks)){}
 else{
 		let isHit = currentBrick.isHit();
 		
@@ -82,7 +82,7 @@ else{
 			let score = score +5;
 //			do currentBrick.dispose();
 //			let bricks[i] = null;
-			do Screen.clearScreen();
+//			do Screen.clearScreen();
 			if((ballX > currentBrick.getX1()) &(ballX < currentBrick.getX2()) )
 			{
 				do ball.toggleFalling();
