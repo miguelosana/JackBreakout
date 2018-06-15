@@ -40,6 +40,17 @@ class Paddle {
 			}
 			return;
 		}
+		if(Keyboard.keyPressed() = 131){
+
+			let coord[1] = 230;
+			do doDraw(false);
+			return;
+		}
+		if(Keyboard.keyPressed() = 133){
+			let coord[1]=240;
+			do doDraw(false);
+		return;
+		}
 
 		return;
 	}

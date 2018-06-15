@@ -25,7 +25,7 @@ class Main{
 
 		let ball = Ball.new();
 		let paddle = Paddle.new();
-		let brickField = BrickField.new(10,15);
+		let brickField = BrickField.new(3,7);
 
 
 		let isRunning = true;
@@ -36,7 +36,7 @@ class Main{
 			let paddleCoords = paddle.draw();
 			let isRunning = ball.draw(paddleCoords);
 			do brickField.hitDetection(ball);
-			do Sys.wait(50);
+			do Sys.wait(10);
 			
 		
 		}

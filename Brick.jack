@@ -6,8 +6,8 @@ class Brick{
 	// can be optimized by moving the fields starting with brick to the BrickField class
 	constructor Brick new(int i, int j){
 
-		let brickWidth = 10;
-		let brickHeight = 10;
+		let brickWidth = 50;
+		let brickHeight = 25;
 		let brickPadding = 0;
 		let brickOffsetTop = 10;
 		let brickOffsetLeft = 10;
@@ -43,13 +43,6 @@ class Brick{
 		}else{
 			do Screen.setColor(false);
 		}
-/*		
-		do Output.moveCursor(1,1);
-		do Output.printInt(x1);
-		do Output.moveCursor(1,10);
-		do Output.printInt(y1);
-	
-	*/
 		do Screen.drawRectangle(x1, y1,x2,y2);
 		return;
 	}

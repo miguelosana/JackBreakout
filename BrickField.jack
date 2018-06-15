@@ -14,8 +14,8 @@ class BrickField{
 			let bricks = Array.new(totalBricks);
 			let i=0;
 			let score=0;
-			let maxY = ((rows * 10 ) +10);
-			let maxX = ((columns * 10) + 10);
+			let maxY = ((rows * 25 ) +10);
+			let maxX = ((columns * 50) + 10);
 				let c =0;
 			while(i < totalBricks){
 				let j=0;
@@ -42,11 +42,11 @@ class BrickField{
 			let i = i+1;
 		}
 
-		do Output.moveCursor(1,50);
+	/*	do Output.moveCursor(1,50);
 		do Output.printString("Score:");
 		do Output.moveCursor(1,57);
 		do Output.printInt(score);
-		
+	*/	
 		return;
 	}
 	method void hitDetection(Ball ball){
@@ -66,14 +66,20 @@ do Output.printInt(maxX);
 let ballX = (ball.getX() -5);
 let ballY = (ball.getY() -5);
 if((ballY < maxY)  & ( ballX < maxX)  ){
-	let xdiv = Math.divide(ballX,10);
-	let ydiv = Math.divide(ballY, 10);
+	let xdiv = Math.divide(ballX,50);
+	let ydiv = Math.divide(ballY, 25);
 	let i = (((xdiv*rows) + ydiv)-1) ;	
-//	do Output.moveCursor(1,60);
-//	do Output.printInt(i);
+	do Output.moveCursor(1,40);
+	do Output.printInt(i);
+        do Output.moveCursor(1,45);
+	do Output.printInt(xdiv);
+	do Output.moveCursor(1,50);
+	do Output.printInt(ydiv);
+        do Output.moveCursor(1,55);
+	do Output.printInt(ballX);	
 
 let 	currentBrick = bricks[i];
-if((currentBrick = null) | (i > totalBricks)){}
+if((currentBrick = null) | (i > totalBricks) ){}
 else{
 		let isHit = currentBrick.isHit();
 		
