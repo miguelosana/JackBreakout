@@ -16,7 +16,7 @@ class Paddle {
 	}
 
 	method Array draw(){
-		let coord[2]= coord[0]+50;
+		let coord[2]= coord[0]+100;
 		let coord[3]= coord[1]+5;
 		do doDraw(true);
 		return coord;
@@ -34,7 +34,7 @@ class Paddle {
 			return;
 		}
 		if(Keyboard.keyPressed() = 132){
-			if((coord[0]+50 +1) <511){
+			if((coord[2] +1) <511){
 				do doDraw(false);
 				let coord[0] = coord[0] + 5;
 			}

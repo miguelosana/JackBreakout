@@ -23,8 +23,17 @@ class Brick{
 	
 	}
 
-	method int getY(){
+	method int getY1(){
 		return y1;
+	}
+	method int getY2(){
+		return y2;
+	}
+	method int getX1(){
+		return x1;
+	}
+	method int getX2(){
+	return x2;
 	}
 	
 
@@ -53,11 +62,6 @@ class Brick{
 		return true;
 		
 	}
-		/*if((((ballX+5) > x1) &( (ballX +5)< x2 )) & (((ballY +5) = y2) | (((ballY+5) =y1) ))){
-			let isActive = false;
-			return true;
-
-		}*/
 	}
 
 	method void dispose(){

@@ -2,7 +2,8 @@ class Ball {
 	field int x,xSpeed;
 	field int y, ySpeed;
 	field int falling,left;
-
+	field boolean onScreen;
+	field int nextX,nextY ;
 
 
 	constructor Ball new(){
@@ -43,10 +44,16 @@ class Ball {
 		}
 		return ;
 	}
+	method void toggleLeft(){
+		if(left =1){
+			let left =0;
+			}else{
+			let left =1;
+			}
+			return;
+	}
 
 	method boolean draw(Array paddleCoords){
-		var boolean onScreen;
-		var int nextX,nextY ;
 		do Screen.setColor(false);
 		do Screen.drawCircle(x, y,5);
 		let onScreen = true;

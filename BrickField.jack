@@ -2,6 +2,8 @@ class BrickField{
 
 	field int rows,columns,totalBricks,maxY,maxX,score;
 	field Array bricks;
+	field Brick currentBrick;
+	field int ballX, ballY;
 
 	constructor BrickField new(int _rows, int _columns){
 			var int i,j,c;
@@ -12,6 +14,8 @@ class BrickField{
 			let bricks = Array.new(totalBricks);
 			let i=0;
 			let score=0;
+			let maxY = ((rows * 10 ) +10);
+			let maxX = ((columns * 10) + 10);
 				let c =0;
 			while(i < totalBricks){
 				let j=0;
@@ -28,7 +32,6 @@ class BrickField{
 
 	method void draw(){
 		var int i,j;
-		var Brick currentBrick;
 		let i=0;
 		while(i < totalBricks){
 			let currentBrick = bricks[i];
@@ -39,35 +42,35 @@ class BrickField{
 			let i = i+1;
 		}
 
-		do Output.moveCursor(1,50);
+/*		do Output.moveCursor(1,50);
 		do Output.printString("Score:");
 		do Output.moveCursor(1,57);
 		do Output.printInt(score);
+		*/
 		return;
 	}
 	method void hitDetection(Ball ball){
 	//optimize don't do naive while lloop
-		var int i,maxY;
-		var Brick currentBrick;
+		var int i;
 		var boolean isHit;
 	var int xdiv,ydiv;
 		let i =0;
 
 
 //x/10 +y/10 = index
-			let maxY = ((rows * 10 ) +10);
-			let maxX = ((columns * 10) + 10);
 /*do Output.moveCursor(1, 50);
 do Output.printInt(ball.getX());
 do Output.moveCursor(1,55);
 do Output.printInt(maxX);
 */
-if(((ball.getY()+5) < maxY)  & ((ball.getX()+5) < maxX)  ){
-	let xdiv = Math.divide(ball.getX(),10);
-	let ydiv = Math.divide(ball.getY(), 10);
+let ballX = (ball.getX() -5);
+let ballY = (ball.getY() -5);
+if((ballY < maxY)  & ( ballX < maxX)  ){
+	let xdiv = Math.divide(ballX,10);
+	let ydiv = Math.divide(ballY, 10);
 	let i = (((xdiv*rows) + ydiv)-1) ;	
-//	do Output.moveCursor(1,60);
-//	do Output.printInt(i);
+	do Output.moveCursor(1,60);
+	do Output.printInt(i);
 
 let 	currentBrick = bricks[i];
 if(currentBrick = null){}
@@ -77,10 +80,16 @@ else{
 		if(isHit){ //bounce the ball back
 			//do Sys.wait(1000);
 			let score = score +5;
-			do currentBrick.dispose();
+//			do currentBrick.dispose();
 //			let bricks[i] = null;
 			do Screen.clearScreen();
-			do ball.toggleFalling();
+			if((ballX > currentBrick.getX1()) &(ballX < currentBrick.getX2()) )
+			{
+				do ball.toggleFalling();
+			}
+			if((ballY > currentBrick.getY1()) & (ballY < currentBrick.getY2())){
+				do ball.toggleLeft();
+			}
 		}
 		}
 }
@@ -90,7 +99,6 @@ else{
 
 	method void dispose(){
 		var int i,j;
-		var Brick currentBrick;
 		
 		let i =0;
 		while(i < totalBricks){
