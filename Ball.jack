@@ -1,3 +1,4 @@
+
 class Ball {
 	field int x,xSpeed;
 	field int y, ySpeed;
@@ -6,10 +7,10 @@ class Ball {
 	field int nextX,nextY ;
 
 
-	constructor Ball new(){
-		let x = 150;
+	constructor Ball new( int randomX ){
+		let x = randomX;
 		let y = 150;
-		let ySpeed = 2;
+		let ySpeed = 1; //low initial falling speed
 		let xSpeed = 2;
 		let falling = 1;
 		let left = 0;
@@ -20,30 +21,40 @@ class Ball {
 	method int getX(){
 		return x;
 	}
+	
+
+	method int getY(){
+		return y;
+	}
+
 	method void increaseXSpeed(int v){
 		if((xSpeed +v ) <10){
 			let xSpeed = xSpeed +v;
 			}
 			return;
 	}
+
 	method void increaseYSpeed(int v){
 		if((ySpeed +v )<10){
 			let ySpeed  = ySpeed +v;
 		}
 		return;
 	}
-	method int getY(){
-		return y;
-	}
 
+	/* Changes the vertical direction when hitting an object */
 	method void toggleFalling(){
 		if(falling=1){
 			let falling = 0;
+			if (ySpeed = 1){
+				let ySpeed =2;
+			}
 		}else{
 			let falling = 1;
 		}
 		return ;
 	}
+
+	/* Changes the horizontal direction when hitting an object */	
 	method void toggleLeft(){
 		if(left =1){
 			let left =0;
@@ -52,6 +63,7 @@ class Ball {
 			}
 			return;
 	}
+	
 
 	method boolean draw(Array paddleCoords){
 		do Screen.setColor(false);
@@ -61,32 +73,36 @@ class Ball {
 		let	falling=1;
 		}
 
-		/* debug code
-		do Output.moveCursor(1,1);
-		do Output.printInt(paddleCoords[1]);
-		do Output.moveCursor(1,10);
-		do Output.printInt((y+ySpeed)+5);
-		do Output.moveCursor(1,20);
-		do Output.printInt((y-ySpeed)-5);
-		*/
 		//check if paddle hit
+		/* Paddles is hit when ball is falling and between the x coordinates of the paddle and the next position will be lower than the y coordinate */
 		if((falling =1) & (((y+ySpeed)+5) > paddleCoords[1]) & ((x > paddleCoords[0]) & (x < paddleCoords[2]))){
 			let falling=0;
-			do increaseYSpeed(0);
+			do increaseYSpeed(0); //change to increase speed on a paddle hit
+			//add some friction
+			if(paddleCoords[4] = 1){
+				let x = x - 5;
+			}
+			if(paddleCoords[4] = 2){
+				let x = x + 5;
+			}
 		}
 
-		//check if leaving playArea
+
+		//check if leaving playArea at bottom
 		if((((y+ySpeed)+5) > 255 )& falling=1){
 			let onScreen=false;
 			return onScreen;
 		}
 
+		//check if hitting a wall (and bounce back)	
 		if(((x + xSpeed) +5) > 507){
 			let left = 0;
 		}
 		if(((x - xSpeed) -5) < 0){
 			let left = 1;
 		}
+
+		//set new coordinates
 		if(left =1){
 			let x = x + xSpeed;
 		}else{

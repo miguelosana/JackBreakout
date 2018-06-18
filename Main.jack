@@ -1,12 +1,24 @@
+/* When run in the VMEmulator set View to screen
+Animate to no animation
+and speed to fast
+*/
 class Main{
 	function void main(){
-		var int lives,score;
+		var int lives,score, randomX;
 		let score = 0;
 		let lives = 3;
-
+		let randomX=0;
+		
+		
+	do Output.moveCursor(1, 10);
+	do Output.printString("Press SpaceBar to start");
 	while(lives > 0 ){
+		let randomX = randomX +1;
+		if(randomX > 500){
+			let randomX=0;
+		}
 		if(Keyboard.keyPressed() = 32){ //start when pressing spacebar
-		do Main.run();
+		do Main.run(randomX);
 
 		let lives = lives -1;
 		}	
@@ -15,7 +27,7 @@ class Main{
 	return;
 	}
 
-	function void run() {
+	function void run(int randomX) {
 	var boolean isRunning ;
 		var Ball ball ;
 		var Paddle paddle;
@@ -23,9 +35,9 @@ class Main{
 		var BrickField brickField;
 
 
-		let ball = Ball.new();
+		let ball = Ball.new(randomX);
 		let paddle = Paddle.new();
-		let brickField = BrickField.new(3,7);
+		let brickField = BrickField.new(3,7,50,25,0,10,10);
 
 
 		let isRunning = true;

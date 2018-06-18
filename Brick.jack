@@ -1,16 +1,9 @@
 class Brick{
-	field int brickWidth,brickHeight,brickPadding,brickOffsetTop,brickOffsetLeft;
 	field boolean isActive;
 	field int x1,y1,x2,y2;	
 	/* i and j are used to calculate the coords of the brick */
-	// can be optimized by moving the fields starting with brick to the BrickField class
-	constructor Brick new(int i, int j){
+	constructor Brick new(int i, int j, int brickWidth, int brickHeight, int brickPadding, int brickOffsetTop, int brickOffsetLeft){
 
-		let brickWidth = 50;
-		let brickHeight = 25;
-		let brickPadding = 0;
-		let brickOffsetTop = 10;
-		let brickOffsetLeft = 10;
 
 		let x1 = (((i*brickWidth+brickPadding)) +brickOffsetLeft);
 		let y1 = (((j*brickHeight+brickPadding)) +brickOffsetTop);
